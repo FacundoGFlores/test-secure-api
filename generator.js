@@ -1,3 +1,8 @@
+if (process.argv.length < 3) {
+  console.log('Usage: node ' + process.argv[1] + ' endpoint_name');
+  process.exit(1);
+}
+
 var fs = require("fs");
 var endpoint = process.argv[2];
 var TEST_TEMPLATE = `
