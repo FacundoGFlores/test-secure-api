@@ -9,5 +9,5 @@ A project for testing secured RestAPIs.
 
 Example:
 
-`npm run newtest posts`. Creates a `posts.js` file inside `test` folder
-`npm test`. Run `posts` test.
+* `npm run newtest posts`. Creates a `posts.js` file inside `test` folder
+* `npm test`. Run `posts` test.
