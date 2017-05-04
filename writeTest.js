@@ -1,6 +1,14 @@
 var fs = require("fs");
 var endpoint_template;
 
+String.prototype.replaceAll = function(search, replace)
+{
+    if (replace === undefined) {
+        return this.toString();
+    }
+    return this.replace(new RegExp(search, 'g'), replace);
+};
+
 var TEST_TEMPLATE = `
 var supertest = require("supertest");
 var should = require("should");
@@ -10,10 +18,10 @@ var config = require("./config");
 var server = supertest.agent(config.apiUrl);
 
 // Begin tests
-describe("GET /${endpoint_template}/",function(){
+describe("GET /{endpoint_template}/",function(){
   it("Responds with json",function(done){
     server
-    .get("${endpoint_template}")
+    .get("{endpoint_template}")
     .set("Authorization", config.authorization)
     .expect("Content-type",/json/)
     .expect(200)
@@ -25,9 +33,9 @@ describe("GET /${endpoint_template}/",function(){
 });`
 
 var writeTest = function (endpoint) {
-  endpoint_template = endpoint;
+  var template = TEST_TEMPLATE.replaceAll('{endpoint_template}', endpoint);
   fs.writeFile(
-      __dirname + '/test/' + endpoint + '.js', TEST_TEMPLATE, (err) => {
+      __dirname + '/test/' + endpoint + '.js', template, (err) => {
       if(err) throw err;
       console.log('File: ' + endpoint + ' was created');
   });

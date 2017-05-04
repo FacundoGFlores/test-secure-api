@@ -7,10 +7,10 @@ var config = require("./config");
 var server = supertest.agent(config.apiUrl);
 
 // Begin tests
-describe("GET /undefined/",function(){
+describe("GET //",function(){
   it("Responds with json",function(done){
     server
-    .get("undefined")
+    .get("")
     .set("Authorization", config.authorization)
     .expect("Content-type",/json/)
     .expect(200)
