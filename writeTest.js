@@ -33,12 +33,18 @@ describe("GET /{endpoint_template}/",function(){
 });`
 
 var writeTest = function (endpoint) {
+  if(endpoint) {
+    return;
+  }
   var template = TEST_TEMPLATE.replaceAll('{endpoint_template}', endpoint);
-  fs.writeFile(
-      __dirname + '/test/' + endpoint + '.js', template, (err) => {
-      if(err) throw err;
-      console.log('File: ' + endpoint + ' was created');
-  });
+  var path = __dirname + '/test/' + endpoint + '.js';
+  if (!fs.existsSync(path)) {
+    fs.writeFile(
+          __dirname + '/test/' + endpoint + '.js', template, (err) => {
+          if(err) throw err;
+          console.log('File: ' + endpoint + ' was created');
+      });
+  }
 }
 
 module.exports = writeTest;
