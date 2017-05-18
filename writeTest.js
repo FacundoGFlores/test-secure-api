@@ -39,7 +39,7 @@ var writeTest = function (endpoint) {
     return;
   }
   var template = TEST_TEMPLATE.replaceAll('{endpoint_template}', endpoint);
-  var pathname = path.join(__dirname, 'test', endpoint + '.js');
+  var pathname = path.join(__dirname, 'test', endpoint + '.spec.js');
   if (!fs.existsSync(pathname)) {
     fs.writeFile(
           pathname, template, (err) => {
