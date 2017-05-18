@@ -11,24 +11,32 @@ String.prototype.replaceAll = function(search, replace)
     return this.replace(new RegExp(search, 'g'), replace);
 };
 
-var TEST_TEMPLATE = `
-var supertest = require("supertest");
-var should = require("should");
-var config = require("./config");
+var TEST_TEMPLATE = `var supertest = require('supertest');
+var config = require('./config');
+var chai = require('chai');
+var expect = chai.expect;
+
+chai.use(require('chai-json-schema'));
+
+var schema = {
+  Id: 0,
+  Name: 'string'
+};
 
 // Set up server
 var server = supertest.agent(config.apiUrl);
 
 // Begin tests
 describe("GET /{endpoint_template}/",function(){
-  it("Responds with json",function(done){
+  it('Responds with valid json schema',function(done){
     server
     .get("{endpoint_template}")
-    .set("Authorization", config.authorization)
-    .expect("Content-type",/json/)
+    .set('Authorization', config.authorization)
+    .expect('Content-type',/json/)
     .expect(200)
     .end(function(err,res){
-      res.status.should.equal(200);
+      expect(res.status).to.be.equal(200);
+      expect(res.body).to.be.jsonSchema(schema);
       done();
     });
   });
