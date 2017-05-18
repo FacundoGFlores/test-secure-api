@@ -1,4 +1,6 @@
 var fs = require("fs");
+var path = require("path");
+
 var endpoint_template;
 
 String.prototype.replaceAll = function(search, replace)
@@ -33,14 +35,14 @@ describe("GET /{endpoint_template}/",function(){
 });`
 
 var writeTest = function (endpoint) {
-  if(endpoint) {
+  if(!endpoint.length) {
     return;
   }
   var template = TEST_TEMPLATE.replaceAll('{endpoint_template}', endpoint);
-  var path = __dirname + '/test/' + endpoint + '.js';
-  if (!fs.existsSync(path)) {
+  var pathname = path.join(__dirname, 'test', endpoint + '.js');
+  if (!fs.existsSync(pathname)) {
     fs.writeFile(
-          __dirname + '/test/' + endpoint + '.js', template, (err) => {
+          pathname, template, (err) => {
           if(err) throw err;
           console.log('File: ' + endpoint + ' was created');
       });
