@@ -18,16 +18,14 @@ var expect = chai.expect;
 
 chai.use(require('chai-json-schema'));
 
-var schema = {
-  Id: 0,
-  Name: 'string'
-};
+var schema = require('./schemas/KeyName.json');
 
 // Set up server
 var server = supertest.agent(config.apiUrl);
 
 // Begin tests
 describe("GET /{endpoint_template}/",function(){
+  this.timeout(30000);
   it('Responds with valid json schema',function(done){
     server
     .get("{endpoint_template}")

@@ -3,3 +3,4 @@ node_modules/
 test/*
 test/!config.js.sample
 list.test
+config.js

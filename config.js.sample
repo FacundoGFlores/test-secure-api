@@ -1,0 +1,5 @@
+const URL = 'http://api.mysite.com/swagger/{VERSION}/swagger.json';
+
+module.exports = {
+  URL
+}
