@@ -5,7 +5,7 @@ if (process.argv.length < 3) {
 
 var testWriter = require("./src/writeTest");
 var option = process.argv[2];
-var listExpr = /list=true/;
+var listExpr = /fromfile=true/;
 
 if (listExpr.test(option)) {
   var endpointList = require("./src/content");
