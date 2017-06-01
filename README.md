@@ -14,6 +14,6 @@ Example:
 
 ## Generating tests from a list of endpoints
 
-1. Fill the `list.test` file with all the endpoints you want to create.
+1. Fill the `endpoints` file with all the endpoints you want to create.
 2. Run the following `npm run newtest list=true`
 3. `npm test` will run all the test created.

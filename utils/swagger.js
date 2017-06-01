@@ -1,19 +1,17 @@
 var path = require('path');
 var fs = require('fs');
 var fetch = require('node-fetch');
-var swaggerConfig = require('./config');
+var swaggerConfig = require('./swagger-config');
 
 function makeSchema(properties) {
   var schema = {};
   Object.keys(properties).forEach(function(property) {
     schema[property] = properties[property].type;
   });
-  console.log("di schema", schema);
   return schema;
 }
 
 function getSchema(body, definition) {
-  console.log('getting', definition, body.definitions[definition].properties);
   return makeSchema(body.definitions[definition].properties)
 }
 
@@ -36,7 +34,7 @@ function writeSchema(definition, schema) {
   if(!definition.length) {
     return;
   }
-  var pathname = path.join(__dirname, 'test', 'schemas', definition + '.json');
+  var pathname = path.join(path.resolve(__dirname, '..'), 'test', 'schemas', definition + '.json');
   if (!fs.existsSync(pathname)) {
     fs.writeFile(
           pathname, JSON.stringify(schema), (err) => {

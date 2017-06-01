@@ -2,5 +2,5 @@
 node_modules/
 test/*
 test/!config.js.sample
-list.test
-config.js
+endpoints
+utils/swagger-config.js
